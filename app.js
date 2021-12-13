@@ -46,12 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
       let currentPosition = 4
       let currentRotation = 0
       
+      console.log(theTetrominoes[0][0])
+
       let random = Math.floor(Math.random()*theTetrominoes.length)
       let current = theTetrominoes[random][currentRotation]
 
       //draw the Tetromino
       function draw(){
-          curent.forEach(index => {
+          current.forEach(index => {
             squares[currentPosition+index].classList.add('tetromino')
           })
       }
@@ -69,15 +71,16 @@ document.addEventListener('DOMContentLoaded', () => {
           undraw()
           currentPosition += width
           draw()
+          freeze()
       }
 
       function freeze(){
-          if(current.some(index => squares[currentPosition + index+width.classList.contains('taken')])){
-                current.forEach(index => squares[currentPosition + index].classList.add('taken'))
-          random = Math.floor(Math.random()*theTetrominoes.length)
-          current = theTetrominoes[random][currentRotation]
-          currentPosition = 4
-          draw()
+          if(current.some(index => squares[currentPosition + index + width].classList.contains('taken'))){
+            current.forEach(index => squares[currentPosition + index].classList.add('taken'))
+            random = Math.floor(Math.random()*theTetrominoes.length)
+            current = theTetrominoes[random][currentRotation]
+            currentPosition = 4
+            draw()
           }
       }
 
